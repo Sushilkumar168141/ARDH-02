@@ -1,0 +1,433 @@
+/* ==========================================================================
+   RESET & THEME VARIABLES
+   ========================================================================== */
+/* Line 5-15: CSS Variables for quick styling customization */
+:root {
+  --bg-main: #0b0f19;
+  --bg-card: #111827;
+  --bg-card-hover: #1f2937;
+  --border-color: #374151;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Line 18-27: Baseline Box-sizing and body defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   HEADER & TOP NAVIGATION
+   ========================================================================== */
+/* Line 37-43: Sticky navbar styling with translucent glass effect */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: rgba(17, 24, 39, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Line 53-65: Brand logo container */
+/* Styling for your custom brand image */
+.brand-logo-img {
+  height: 40px;          /* Adjust height to fit your logo */
+  width: auto;           /* Keeps the logo aspect ratio intact */
+  object-fit: contain;   /* Prevents squishing or distortion */
+  display: block;
+}
+
+/* Ensure the brand container aligns items vertically */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.brand-name { font-size: 1.125rem; font-weight: 700; letter-spacing: 0.05em; }
+.brand-subtitle { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Line 68-87: Tab buttons */
+.desktop-nav { display: flex; gap: 0.5rem; }
+
+.nav-link {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover { color: var(--text-main); background-color: var(--bg-card-hover); }
+.nav-link.active { background-color: var(--primary); color: #fff; }
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   PROJECT FILTER PILLS
+   ========================================================================== */
+/* ==========================================================================
+   PROJECT SELECTOR DROPDOWN
+   ========================================================================== */
+/* Container holding the label and dropdown select element */
+.project-selector-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+/* Label styling with icon */
+.project-selector-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.dropdown-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+}
+
+/* Container for relative positioning and custom arrow styling */
+.dropdown-custom-container {
+  position: relative;
+  min-width: 280px;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* The styled native <select> element */
+.project-dropdown {
+  width: 100%;
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* Removes native OS default dropdown arrows */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Custom dropdown chevron arrow */
+.dropdown-custom-container::after {
+  content: "▾";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 0.85rem;
+}
+
+/* Hover and focus ring states */
+.project-dropdown:hover {
+  border-color: #4b5563;
+}
+
+.project-dropdown:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Styling options inside the dropdown (supported across modern browsers) */
+.project-dropdown option {
+  background-color: #111827;
+  color: #f9fafb;
+  padding: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .project-selector-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .dropdown-custom-container {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* ==========================================================================
+   SPLIT VIEW LAYOUT (1/4TH LEFT & 3/4TH RIGHT)
+   ========================================================================== */
+/* Line 121-133: Container split grid setup */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* EXACT 1/4th and 3/4th split */
+  gap: 1.5rem;
+  height: calc(100vh - 180px);
+  min-height: 550px;
+}
+
+/* Line 136-155: Left 1/4th Thumbnail Rail */
+.thumbnail-sidebar {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: 0.75rem 1rem;
+  background-color: rgba(31, 41, 55, 0.4);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+.sidebar-title { font-weight: 600; color: var(--text-muted); }
+.asset-badge { background: #374151; padding: 2px 8px; border-radius: 10px; }
+
+.thumbnail-rail {
+  padding: 0.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Line 163-189: Thumbnail item styles */
+.thumb-item {
+  display: flex;
+  gap: 0.75rem;
+  background-color: rgba(31, 41, 55, 0.3);
+  border: 1px solid transparent;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.thumb-item:hover { border-color: var(--border-color); }
+.thumb-item.active { border-color: var(--primary); background-color: rgba(59, 130, 246, 0.1); }
+
+.thumb-preview {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  background-color: #1f2937;
+}
+
+.thumb-details { display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+.thumb-title { font-size: 0.8125rem; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.thumb-meta { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+
+/* Line 191-225: Right 3/4th Stage Container */
+.stage-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-card {
+  flex: 1;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.stage-viewport {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #030712;
+  overflow: hidden;
+}
+
+.main-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(17, 24, 39, 0.7);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.nav-arrow:hover { background-color: var(--primary); }
+.prev-arrow { left: 1rem; }
+.next-arrow { right: 1rem; }
+
+/* Line 239-258: Stage details bar below image */
+.stage-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meta-tag {
+  font-size: 0.7rem;
+  background-color: #1e3a8a;
+  color: #93c5fd;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.stage-title { font-size: 1.25rem; font-weight: 600; margin-top: 4px; }
+.stage-path { font-size: 0.75rem; color: var(--text-muted); font-family: monospace; margin-top: 2px; display:none !important;}
+
+.stage-actions { display: flex; gap: 0.5rem; }
+.icon-btn {
+  background-color: var(--bg-card-hover);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.icon-btn:hover { background-color: var(--primary); }
+
+#copyPathBtn {
+  display: none !important;
+}
+
+/* ==========================================================================
+   ABOUT & CONTACT VIEWS
+   ========================================================================== */
+.content-wrapper { max-width: 900px; margin: 2rem auto; }
+.section-heading { font-size: 2rem; margin-bottom: 0.5rem; }
+.section-lead { color: var(--text-muted); margin-bottom: 2rem; }
+
+.grid-three {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.info-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+.card-icon { color: var(--primary); margin-bottom: 1rem; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.contact-item { display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem; color: var(--text-muted); }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.8125rem; color: var(--text-muted); }
+.form-group input, .form-group textarea {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+}
+.submit-btn {
+  background-color: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   LIGHTBOX & UTILITIES
+   ========================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+.hidden { display: none !important; }
+
+/* Responsive adjustments for phones/tablets */
+@media (max-width: 900px) {
+  .split-layout { grid-template-columns: 1fr; height: auto; }
+  .desktop-nav { display: none; }
+  .mobile-menu-btn { display: block; }
+  .mobile-nav { display: flex; flex-direction: column; padding: 1rem; border-top: 1px solid var(--border-color); }
+  .contact-grid { grid-template-columns: 1fr; }
+}

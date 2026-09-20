@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Line 1-5: Document metadata, title, and viewport setup for mobile responsiveness -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Portfolio</title>
+
+	<!-- BROWSER TAB LOGO (FAVICON) -->
+	<link rel="icon" type="image/png" href="images/Logo/logo.png">
+
+  <!-- Line 8: Link to your external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Line 11: Lucide Icons CDN for navigation, arrows, and controls -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- ================= HEADER & NAVIGATION ================= -->
+  <header class="header">
+    <div class="header-inner">
+      <!-- Line 18-24: Brand logo and title -->
+      <div class="brand">
+        <div class="brand-icon">
+          <!-- <i data-lucide="layers"></i> -->
+          <img src="images/Logo/logo.png" alt="Company Logo" class="brand-logo-img">
+        </div>
+        <div>
+          <h1 class="brand-name">ARCH ROOTS DESIGN HUB</h1>
+          <p class="brand-subtitle">Visual Project Portfolio</p>
+        </div>
+      </div>
+			
+
+      <!-- Line 28-32: Desktop Navigation buttons for view toggling -->
+      <nav class="desktop-nav">
+        <button class="nav-link active" data-target="home">Projects</button>
+        <button class="nav-link" data-target="about">About Us</button>
+        <button class="nav-link" data-target="contact">Contact Us</button>
+      </nav>
+
+      <!-- Line 35-37: Mobile hamburger toggle button -->
+      <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle navigation menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+
+    <!-- Line 41-45: Mobile Navigation menu (hidden by default) -->
+    <div id="mobileNav" class="mobile-nav hidden">
+      <button class="nav-link mobile-link active" data-target="home">Projects</button>
+      <button class="nav-link mobile-link" data-target="about">About Us</button>
+      <button class="nav-link mobile-link" data-target="contact">Contact Us</button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="main-content">
+
+    <!-- PAGE VIEW 1: HOME / PROJECTS GALLERY -->
+    <section id="view-home" class="page-view active">
+      <!-- Line 53-56: Project filter selector pills -->
+			<!-- ================= PROJECT SELECTOR DROPDOWN ================= -->
+			<!-- Replaces the horizontal pill bar with a clean dropdown menu -->
+			<div class="project-selector-wrapper">
+				<label for="projectDropdown" class="project-selector-label">
+					<i data-lucide="folder" class="dropdown-icon"></i>
+					<span>SELECT PROJECT:</span>
+				</label>
+				<div class="dropdown-custom-container">
+					<select id="projectDropdown" class="project-dropdown" aria-label="Select Project">
+						<!-- Options are populated dynamically by script.js -->
+					</select>
+				</div>
+			</div>
+
+      <!-- Line 59-95: The 1/4th and 3/4th Split View -->
+      <div class="split-layout">
+        
+        <!-- LEFT 1/4TH: Scrollable Thumbnail Strip -->
+        <aside class="thumbnail-sidebar">
+          <div class="sidebar-header">
+            <span class="sidebar-title">PROJECT ASSETS</span>
+            <span id="assetCountBadge" class="asset-badge">0 Assets</span>
+          </div>
+          <!-- Line 68: Dynamic thumbnail list rendered by script.js -->
+          <div id="thumbnailRail" class="thumbnail-rail"></div>
+        </aside>
+
+        <!-- RIGHT 3/4TH: Main Enlarged Stage -->
+        <section class="stage-container">
+          <div class="stage-card">
+            <!-- Line 75-80: Image viewport with next/prev arrows -->
+            <div class="stage-viewport">
+              <button id="prevBtn" class="nav-arrow prev-arrow" aria-label="Previous Image">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <img id="mainImage" class="main-image" src="" alt="Active Project Image">
+              <button id="nextBtn" class="nav-arrow next-arrow" aria-label="Next Image">
+                <i data-lucide="chevron-right"></i>
+              </button>
+            </div>
+
+            <!-- Line 84-93: Details footer below the enlarged picture -->
+            <div class="stage-footer">
+              <div class="stage-info">
+                <span id="activeProjectBadge" class="meta-tag">Project</span>
+                <h2 id="activeImageTitle" class="stage-title">Image Title</h2>
+                <p id="activeImagePath" class="stage-path">images/path/file.jpg</p> <!-- comment before going live to hide image path-->
+              </div>
+              <div class="stage-actions">
+                <button id="fullscreenBtn" class="icon-btn" title="View Fullscreen">
+                  <i data-lucide="maximize-2"></i>
+                </button>
+                <button id="copyPathBtn" class="icon-btn" title="Copy File Path">
+                  <i data-lucide="copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- PAGE VIEW 2: ABOUT US -->
+    <section id="view-about" class="page-view hidden">
+      <div class="content-wrapper">
+        <h2 class="section-heading">About Our Studio</h2>
+        <p class="section-lead">We specialize in architectural visualization, 3D modeling, and digital portfolio presentation.</p>
+        
+        <div class="grid-three">
+          <div class="info-card">
+            <i data-lucide="compass" class="card-icon"></i>
+            <h3>Design Focused</h3>
+            <p>We build streamlined, responsive visual experiences optimized for local and web-delivered assets.</p>
+          </div>
+          <div class="info-card">
+            <i data-lucide="cpu" class="card-icon"></i>
+            <h3>Zero Dependencies</h3>
+            <p>Fast load speeds with lightweight static code ready for GitHub Pages hosting.</p>
+          </div>
+          <div class="info-card">
+            <i data-lucide="shield-check" class="card-icon"></i>
+            <h3>Production Ready</h3>
+            <p>Modular code architecture allowing simple maintenance and asset drops.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE VIEW 3: CONTACT US -->
+    <section id="view-contact" class="page-view hidden">
+      <div class="content-wrapper contact-grid">
+        <div class="contact-info">
+          <h2 class="section-heading">Get in Touch</h2>
+          <p class="section-lead">Have questions or want to collaborate? Reach out to us below.</p>
+          <div class="contact-item">
+            <i data-lucide="mail"></i>
+            <span>ardhinfo.com@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="map-pin"></i>
+            <span>Jhajjar, Haryana / Remote</span>
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" id="nameInput" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="emailInput">Email</label>
+            <input type="email" id="emailInput" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="messageInput">Message</label>
+            <textarea id="messageInput" rows="4" placeholder="Tell us about your project..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= LIGHTBOX MODAL ================= -->
+  <div id="lightbox" class="lightbox hidden">
+    <button id="closeLightboxBtn" class="lightbox-close" aria-label="Close Lightbox">
+      <i data-lucide="x"></i>
+    </button>
+    <img id="lightboxImg" src="" alt="Fullscreen view" class="lightbox-img">
+  </div>
+
+  <!-- Line 172: Link to external JavaScript logic -->
+  <script src="script.js"></script>
+</body>
+</html>
